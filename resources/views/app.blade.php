@@ -32,15 +32,27 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
+                            @if(!Auth::guard('admin')->check() && !Auth::guard('user')->check())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">Register</a>
                             </li>
+                            @endif
+                            @if(Auth::guard('admin')->check())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                             </li>
+                            @endif
+                            @if(Auth::guard('user')->check())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('signout') }}">Logout</a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
