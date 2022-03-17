@@ -3,21 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Hash;
-use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuminate\Support\Facades\Session as FacadesSession;
-
 class AuthController extends Controller
 {
         public function index()
         {
+            if(Auth::guard('admin')->check()){
+                return view('dashboard');
+            }
+            elseif (Auth::guard('user')->check()) {
+                return Redirect('/');
+            }
             return view('login');
         }  
         public function registration()
         {
+            if(Auth::guard('admin')->check()){
+                return view('dashboard');
+            }
+            elseif (Auth::guard('user')->check()) {
+                return Redirect('/');
+            }
             return view('register');
         }
           
