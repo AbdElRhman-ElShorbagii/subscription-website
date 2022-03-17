@@ -32,7 +32,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
-                            @if(!Auth::guard('admin')->check() && !Auth::guard('user')->check())
+                            @if(!Auth::guard('admin')->check() || !Auth::guard('user')->check())
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                             </li>
