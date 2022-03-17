@@ -7,6 +7,16 @@
                 <div class="card">
                     <h3 class="card-header text-center">Register User</h3>
                     <div class="card-body">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <form action="{{ route('register-user') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
