@@ -27,5 +27,7 @@ Route::get('register', [AuthController::class, 'registration'])->name('register'
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard'); 
 Route::post('login', [AuthController::class, 'login'])->name('login'); 
 
-Route::get('user', [UserController::class, 'index'])->name('user'); 
+Route::get('user', [UserController::class, 'index'])->name('user');
+Route::get('/search',[UserController::class, 'search'])->name('search');
+
 
