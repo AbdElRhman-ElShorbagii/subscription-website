@@ -15,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->select('id','name','email')->get();
+        $users = DB::table('users')->select('id','name','email','is_blocked')->get();
 
-        return view('user')->with('users', $users);
+        return view('users.index')->with('users', $users);
 
     }
     public function search(Request $request){
@@ -31,7 +31,7 @@ class UserController extends Controller
             ->get();
     
         // Return the search view with the resluts compacted
-        return view('user', compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -41,18 +41,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('users.create');
     }
 
     /**
@@ -63,7 +52,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('users.show',compact('user'));
     }
 
     /**
@@ -72,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -84,9 +73,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'is_blocked' => 'required',
+        ]);
+    
+        $user->update($request->all());
+    
+        return redirect()->route('users.index')
+                        ->with('success','User updated successfully');
     }
 
     /**
@@ -95,8 +93,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+    
+        return redirect()->route('user.index')
+                        ->with('success','User deleted successfully');
+
     }
 }
