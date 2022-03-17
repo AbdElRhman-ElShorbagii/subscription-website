@@ -27,7 +27,8 @@ Route::get('register', [AuthController::class, 'registration'])->name('register'
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard'); 
 Route::post('login', [AuthController::class, 'login'])->name('login'); 
 
-Route::get('user', [UserController::class, 'index'])->name('user');
+Route::resource('user', UserController::class);
+
 Route::get('/search',[UserController::class, 'search'])->name('search');
 
 
