@@ -17,6 +17,8 @@
                       <th scope="col">#</th>
                       <th scope="col">name</th>
                       <th scope="col">email</th>
+                      <th scope="col">Is Blocked</th>
+                      <th scope="col">Actions</th>
                     </tr>
                   </thead>
                   @if($users->isNotEmpty())
@@ -26,6 +28,15 @@
                         <td>{{ $user->id}}</td>
                         <td>{{ $user->name}}</td>
                         <td>{{ $user->email}}</td>
+                        <td>{{ $user->is_blocked}}</td>
+                        <td>
+                          <form action="{{ route('user.destroy',$user->id) }}" method="POST">              
+                              <a class="btn btn-primary" href="{{ route('user.edit',$user->id) }}">Edit</a>
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                        </td>
                     </tr>
                     @endforeach
                   </tbody>
