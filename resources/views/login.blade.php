@@ -7,8 +7,8 @@
                 <div class="card">
                     <h3 class="card-header text-center">Login</h3>
                     <div class="card-body">
-                        {{-- <form method="POST" action="{{ route('login') }}"> --}}
-                            <form>
+                        <form method="POST" action="{{ route('login') }}">
+                            {{-- <form> --}}
                             @csrf
                             <div class="form-group mb-3">
                                 <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
