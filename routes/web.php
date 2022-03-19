@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,9 @@ Route::get('/', function () {
 Route::get('/block', function () {
     return view('block');
 });
+Route::get('/checkout', function () {
+    return view('checkout');
+});
 
 Route::post('register-user', [AuthController::class, 'registerUser'])->name('register-user'); 
 Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
@@ -34,6 +38,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::resource('user', UserController::class);
 
 Route::get('/search',[UserController::class, 'search'])->name('search');
+Route::get('/checkout/{price}',[CheckoutController::class, 'checkout'])->name('checkout');
 
 Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
 Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
