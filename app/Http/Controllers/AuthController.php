@@ -35,9 +35,13 @@ class AuthController extends Controller
                 'email' => 'required',
                 'password' => 'required',
             ]);
+            
             $controller = new AuthController;
             $controller->signOut();
             if (Auth::guard('user')->attempt($request->only('email', 'password'))) {
+                if(Auth::guard('user')->user()->is_blocked){
+                    return Redirect('/block');
+                }
                 return redirect()->intended('/')
                             ->withSuccess('Signed in');
             }

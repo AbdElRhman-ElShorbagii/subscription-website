@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/block', function () {
+    return view('block');
+});
 
 Route::post('register-user', [AuthController::class, 'registerUser'])->name('register-user'); 
 Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
@@ -34,4 +37,3 @@ Route::get('/search',[UserController::class, 'search'])->name('search');
 
 Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
 Route::get('auth/facebook/callback', [SocialController::class, 'loginWithFacebook']);
-
